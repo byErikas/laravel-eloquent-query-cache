@@ -95,7 +95,7 @@ trait QueryCacheModule
      * @param  string|null  $id
      * @return \Closure
      */
-    public function getQueryCacheCallback(string $method = 'get', $columns = ['*'], string $id = null)
+    public function getQueryCacheCallback(string $method = 'get', $columns = ['*'], ?string $id = null)
     {
         return function () use ($method, $columns) {
             $this->avoidCache = true;

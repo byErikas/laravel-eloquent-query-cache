@@ -3,6 +3,7 @@
 namespace Rennokki\QueryCache;
 
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class FlushQueryCacheObserver
@@ -150,14 +151,14 @@ class FlushQueryCacheObserver
      *
      * @throws Exception
      */
-    protected function invalidateCache(Model $model, $relation = null, $pivotedModels = null): void
+    protected function invalidateCache(Model $model, ?string $relation = null, ?Collection $pivotedModels = null): void
     {
         $class = get_class($model);
 
         $tags = $model->getCacheTagsToInvalidateOnUpdate($relation, $pivotedModels);
 
         if (! $tags) {
-            throw new Exception('Automatic invalidation for '.$class.' works only if at least one tag to be invalidated is specified.');
+            throw new Exception('Automatic invalidation for ' . $class . ' works only if at least one tag to be invalidated is specified.');
         }
 
         $class::flushQueryCache($tags);

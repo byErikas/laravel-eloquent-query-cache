@@ -153,10 +153,10 @@ trait QueryCacheModule
 
         // Count has no Sql, that's why it can't be used ->toSql()
         if ($method === 'count') {
-            return $name . $method . $id . serialize($this->getBindings()) . $appends;
+            return $name.$method.$id.serialize($this->getBindings()).$appends;
         }
 
-        return $name . $method . $id . $this->toSql() . serialize($this->getBindings()) . $appends;
+        return $name.$method.$id.$this->toSql().serialize($this->getBindings()).$appends;
     }
 
     /**
